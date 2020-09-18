@@ -1,0 +1,34 @@
+version: '2.2'
+services:
+  web:
+    build:
+      context: web/
+      dockerfile: Dockerfile
+    depends_on:
+       - db
+    image: dislock-web
+    ports:
+      - "8080:8080"
+    networks:
+      - dislock-network
+
+  db:
+     build:
+       context: db/
+       dockerfile: Dockerfile
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     ports:
+       - "3306:3306"
+     environment:
+       MYSQL_ROOT_PASSWORD: dislock
+       MYSQL_DATABASE: dislock
+       MYSQL_USER: dislock
+       MYSQL_PASSWORD: dislock
+
+volumes:
+    db_data: {}
+
+networks:
+  dislock-network:
