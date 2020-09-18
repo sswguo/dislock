@@ -26,6 +26,8 @@ services:
        MYSQL_DATABASE: dislock
        MYSQL_USER: dislock
        MYSQL_PASSWORD: dislock
+     networks:
+       - dislock-network
 
 volumes:
     db_data: {}
