@@ -26,6 +26,7 @@ public class OrderController {
     @RequestMapping( method = RequestMethod.GET, value = "/items" )
     public List<Item> getAllItems()
     {
+        System.out.println( "find all." );
         return itemRepository.findAll();
     }
 
