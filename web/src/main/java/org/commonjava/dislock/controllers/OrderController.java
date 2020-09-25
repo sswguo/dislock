@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @RestController
@@ -36,12 +37,24 @@ public class OrderController {
         lock.lock( );
         try
         {
-            //TODO get entry from the db
-            System.out.println( "enter into the lock part." );
+            Item item = itemRepository.findById( Long.valueOf( 1 ) ).orElse( null );
+
+            if ( item == null )
+            {
+                item = new Item( Long.valueOf( 1 ), "football", Integer.valueOf( 10 ), "World Cup Ball!" );
+                itemRepository.save( item );
+            }
+
+            item = itemRepository.findById( Long.valueOf( 1 ) ).orElse( null );
+            item.setCount( item.getCount().intValue() - 1 );
+            itemRepository.save( item );
+
+            item = itemRepository.findById( Long.valueOf( 1 ) ).orElse( null );
+            System.out.println( Thread.currentThread().getName() + "/Item: " + item.toString() );
         }
         catch ( Exception e )
         {
-            //
+            e.printStackTrace();
         }
         finally
         {
