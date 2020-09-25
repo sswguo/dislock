@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
        - db
+       - redis
     image: dislock-web
     ports:
       - "8080:8080"
@@ -27,6 +28,15 @@ services:
        MYSQL_USER: dislock
        MYSQL_PASSWORD: dislock
      networks:
+       - dislock-network
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_REPLICATION_MODE=master
+    networks:
        - dislock-network
 
 volumes:
