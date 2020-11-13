@@ -1,4 +1,4 @@
-package org.commonjava.dislock.confg;
+package org.commonjava.dislock.cluster;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.config.JoinConfig;

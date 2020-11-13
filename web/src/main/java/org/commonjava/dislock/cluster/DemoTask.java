@@ -1,4 +1,4 @@
-package org.commonjava.dislock.confg;
+package org.commonjava.dislock.cluster;
 
 import java.io.Serializable;
 
